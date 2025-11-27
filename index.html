@@ -1,56 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static Website</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Static Website</title>
 
-    <style>
-      .center {
-        text-align: center;
-      }
+  <style>
+    .center {
+      text-align: center;
+    }
 
-      img {
-        max-width: 100%;
-        height: auto;
-      }
-    </style>
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
 
-    <script>
-      async function handleClick() {
-        const response = await fetch(
-          "http://joshua-ci-cd-website.s3-website.eu-west-2.amazonaws.com"
-        );
-        const text = await response.text();
+<body>
+  <div class="center">
+    <h1>Hello all! What happens when you click on the button below?</h1>
 
-        document.getElementById("response").innerText = text;
-        document.getElementById("img").src =
-          "https://images.unsplash.com/photo-1540573131680-73e5d4fff4d8";
-      }
-    </script>
-  </head>
+    <button type="button" onclick="handleClick()">Click me</button>
 
-  <body>
-    <div class="center">
-      <h1>
-        Hello
-        <span id="response">
-          all! What happens when you click on the button below?
-        </span>
-      </h1>
+    <br><br>
 
-      <button type="button" onclick="handleClick()">Click me</button>
+    <span id="response"></span>
 
-      <br>
-      <br>
+    <img id="img" src="https://images.unsplash.com/photo-1540577318680-7e35d44ff57d" alt="Dynamic image displayed after click" />
+  </div>
 
-      <img
-        id="img"
-        width="600"
-        height="400"
-        alt="Dynamic image displayed after click"
-        src="https://images.unsplash.com/photo-1529247833802-700f531f0380"
-      >
-    </div>
-  </body>
+  <script>
+    async function handleClick() {
+      const response = await fetch("YOUR_LAMBDA_URL_HERE");
+      const text = await response.text();
+
+      document.getElementById("response").innerText = text;
+      document.getElementById("img").src =
+        "https://images.unsplash.com/photo-1540577318680-7e35d44ff57d";
+    }
+  </script>
+</body>
 </html>
