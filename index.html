@@ -6,6 +6,12 @@
   <title>Static Website</title>
 
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px 10px;
+    }
+
     .center {
       text-align: center;
     }
@@ -14,30 +20,44 @@
       max-width: 100%;
       height: auto;
     }
+
+    #message {
+      margin-top: 16px;
+      font-size: 18px;
+      font-weight: 600;
+    }
   </style>
 </head>
 
 <body>
   <div class="center">
-    <h1>Hello all! What happens when you click on the button below?</h1>
+    <h1>
+      Hello all! What happens when you click on the button below?
+    </h1>
 
     <button type="button" onclick="handleClick()">Click me</button>
 
-    <br><br>
+    <p id="message"></p>
 
-    <span id="response"></span>
-
-    <img id="img" src="https://images.unsplash.com/photo-1540577318680-7e35d44ff57d" alt="Dynamic image displayed after click" />
+    <img
+      id="photo"
+      width="600"
+      height="400"
+      alt="Scenic landscape"
+      src="https://images.unsplash.com/photo-1529247833802-700f531f0380"
+    >
   </div>
 
   <script>
-    async function handleClick() {
-      const response = await fetch("YOUR_LAMBDA_URL_HERE");
-      const text = await response.text();
+    function handleClick() {
+      const message = document.getElementById("message");
+      const photo = document.getElementById("photo");
 
-      document.getElementById("response").innerText = text;
-      document.getElementById("img").src =
-        "https://images.unsplash.com/photo-1540577318680-7e35d44ff57d";
+      message.innerText = "Button clicked! (No backend yet – this is just the browser changing things.)";
+
+      // Swap to a different image
+      photo.src = "https://images.unsplash.com/photo-1522202222505-16949cdb80ca";
+      photo.alt = "People working at laptops";
     }
   </script>
 </body>
