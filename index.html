@@ -39,12 +39,13 @@
 
     <p id="message"></p>
 
+    <!-- Initial image -->
     <img
       id="photo"
       width="600"
       height="400"
-      alt="Scenic landscape"
-      src="https://images.unsplash.com/photo-1529247833802-700f531f0380"
+      alt="Calm placeholder image"
+      src="https://picsum.photos/seed/initial-image/800/400"
     >
   </div>
 
@@ -55,9 +56,9 @@
 
       message.innerText = "Button clicked! (No backend yet – this is just the browser changing things.)";
 
-      // Swap to a different image
-      photo.src = "https://images.unsplash.com/photo-1522202222505-16949cdb80ca";
-      photo.alt = "People working at laptops";
+      // Change to a different placeholder image when the button is clicked
+      photo.src = "https://picsum.photos/seed/clicked-image/800/400";
+      photo.alt = "Different placeholder image shown after click";
     }
   </script>
 </body>
