@@ -6,60 +6,60 @@
   <title>Static Website</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 40px 10px;
-    }
-
     .center {
       text-align: center;
+      margin-top: 40px;
     }
 
     img {
       max-width: 100%;
       height: auto;
     }
-
-    #message {
-      margin-top: 16px;
-      font-size: 18px;
-      font-weight: 600;
-    }
   </style>
-</head>
 
+  <script>
+    async function handleClick() {
+      const responseSpan = document.getElementById('response');
+      const image = document.getElementById('img');
+
+      // Show something while we wait for the backend
+      responseSpan.innerText = 'Calling the backend...';
+
+      try {
+        // ✅ Call your Lambda via API Gateway
+        const response = await fetch(
+          'https://xu87n3elec.execute-api.eu-west-2.amazonaws.com/'
+        );
+
+        const text = await response.text();
+
+        // Put Lambda's message into the page
+        responseSpan.innerText = text;
+
+        // Change the image when the call succeeds
+        image.src = 'https://images.unsplash.com/photo-1529245019870-59b249281fd0?auto=format&fit=crop&w=800&q=80';
+        image.alt = 'People working at laptops';
+      } catch (error) {
+        // If anything fails, show a friendly error
+        responseSpan.innerText = 'Something went wrong calling the backend.';
+      }
+    }
+  </script>
+</head>
 <body>
   <div class="center">
-    <h1>
-      Hello all! What happens when you click on the button below?
-    </h1>
+    <h1>Hello all! What happens when you click on the button below?</h1>
 
     <button type="button" onclick="handleClick()">Click me</button>
 
-    <p id="message"></p>
+    <p id="response">
+      Button not clicked yet.
+    </p>
 
-    <!-- Initial image -->
     <img
-      id="photo"
-      width="600"
-      height="400"
-      alt="Calm placeholder image"
-      src="https://picsum.photos/seed/initial-image/800/400"
-    >
+      id="img"
+      src="https://images.unsplash.com/photo-1529245019870-59b249281fd0?auto=format&fit=crop&w=800&q=80"
+      alt="People working at laptops">
   </div>
-
-  <script>
-    function handleClick() {
-      const message = document.getElementById("message");
-      const photo = document.getElementById("photo");
-
-      message.innerText = "Button clicked! (No backend yet – this is just the browser changing things.)";
-
-      // Change to a different placeholder image when the button is clicked
-      photo.src = "https://picsum.photos/seed/clicked-image/800/400";
-      photo.alt = "Different placeholder image shown after click";
-    }
-  </script>
 </body>
 </html>
